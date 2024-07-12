@@ -15,18 +15,13 @@ document.addEventListener("click", (e) => {
     expression = "";
     return;
   }
-  // if user clicks on button it is displayed and numbers are added together as string
-  if (
-    (expression.includes(symbol) && e.target.matches(".number")) ||
-    e.target.matches(".number")
-  ) {
+  if (e.target.matches(".number")) {
     let number = e.target.innerText;
-    tempArr.push(number);
     expression = expression + number;
+    tempArr.push(number);
     display.value = expression;
     console.log(tempArr);
   }
-  // if user clicks on operator button an operator symbol is added to the expression string
   if (e.target.matches(".operator")) {
     let exp = tempArr.join("");
     symbol = e.target.innerText;
@@ -34,7 +29,6 @@ document.addEventListener("click", (e) => {
     arr.push(exp);
     arr.push(symbol);
     console.log(arr);
-    expression = expression + symbol;
   }
   // if the expression has an operator and the number button is then clicked again, the input field will reset and a second value will be used to display
   //   if (expression.includes(symbol) && e.target.matches(".number")) {
