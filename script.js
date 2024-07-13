@@ -1,48 +1,59 @@
+// Selectors
 const container = document.querySelector(".container");
 const display = document.querySelector(".input");
-const btn = [...document.querySelectorAll("button")];
-let arr = [];
-let tempArr = [];
+const numBtn = [...document.querySelectorAll(".number")];
+const operatorBtn = [...document.querySelectorAll(".operator")];
+// Global variables
 let expression = "";
-let secondValue = "";
-let symbol;
 
-document.addEventListener("click", (e) => {
+let a;
+let b;
+
+container.addEventListener("click", (e) => {
   if (!e.target.matches("button")) return;
   // if user clicks on clear button input field clears and expression clears
   if (e.target.matches(".clear")) {
     display.value = "";
-    expression = "";
+    a = "";
     return;
   }
   if (e.target.matches(".number")) {
-    let number = e.target.innerText;
-    expression = expression + number;
-    tempArr.push(number);
-    display.value = expression;
-    console.log(tempArr);
-  }
-  if (e.target.matches(".operator")) {
-    let exp = tempArr.join("");
-    symbol = e.target.innerText;
-    tempArr = [];
-    arr.push(exp);
-    arr.push(symbol);
-    console.log(arr);
-  }
-  // if the expression has an operator and the number button is then clicked again, the input field will reset and a second value will be used to display
-  //   if (expression.includes(symbol) && e.target.matches(".number")) {
-  //     display.value = "";
-  //     let number = e.target.innerText;
-  //     expression = expression + number;
-  //     display.value = expression;
-  //   }
+    // if operator was clicked before, display will be reset and attribute will be removed.
+    let clicked = document.querySelector("[data-click]");
+    if (clicked) {
+      display.value = "";
+      clicked.removeAttribute("data-click");
+    }
 
-  //   let arr = expression.split(symbol);
-  //   console.log(symbol.name);
-  //   if (e.target.matches(".equals")) {
-  //     operate(arr[0], arr[1], symbol);
-  //   }
+    // display.value = "";
+    // Select number
+    let number = e.target.innerText;
+    // expression variable is given the number
+    display.value = display.value + number;
+    // expression is displayed in input field
+    a = display.value;
+  }
+  // I might use this but i just left it here in case
+  // if (e.target.matches(".number2")) {
+  //   // Select number
+  //   let number = e.target.innerText;
+  //   // expression variable is given the number
+  //   display.value = display.value + number;
+  //   // expression is displayed in input field
+  //   b = display.value;
+  // }
+
+  if (e.target.matches(".operator")) {
+    // An attribute is set to the html to reference if user decides to click on number again
+    e.target.setAttribute("data-click", true);
+    // numBtn.forEach((num) => {
+    //   num.classList.toggle("number");
+    //   num.classList.toggle("number2");
+    // });
+    // Run operate function if two conditions have been satisfied
+    // if (a !== "" && b !== "") operate(a, b);
+  }
+  console.log(a);
 });
 
 // Helper function
