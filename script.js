@@ -12,6 +12,7 @@ container.addEventListener("click", (e) => {
   // if user clicks on clear button input field clears and classes reset
   if (e.target.matches(".clear")) {
     display.value = "";
+    arr = [];
     // numBtn.forEach((num) => {
     //   num.classList.remove("number2");
     //   num.classList.add("number");
@@ -43,7 +44,7 @@ container.addEventListener("click", (e) => {
   if (e.target.matches(".operator")) {
     // An attribute is set to the html to reference if user decides to click on number again
     e.target.setAttribute("data-click", true);
-    arr.push(display.value);
+    arr.push(parseInt(display.value));
     arr.push(e.target.innerText);
     // numBtn.forEach((num) => {
     //   num.classList.toggle("number");
@@ -54,6 +55,18 @@ container.addEventListener("click", (e) => {
   }
 
   if (e.target.matches(".equals")) {
+    e.target.setAttribute("data-click", true);
+    let value1 = arr[0];
+    let operator = arr[1];
+    let value2 = parseInt(display.value);
+    if (arr[1] === "*") operator = multiply;
+    if (arr[1] === "/") operator = divide;
+    if (arr[1] === "+") operator = add;
+    if (arr[1] === "-") operator = subtract;
+
+    let result = operate(value1, value2, operator);
+    display.value = result;
+    arr = [];
   }
   console.log(arr);
 });
@@ -81,7 +94,5 @@ function divide(a, b) {
 }
 
 function operate(value1, value2, operation) {
-  parseInt(value1);
-  parseInt(value2);
-  operation(value1, value2);
+  return operation(value1, value2);
 }
