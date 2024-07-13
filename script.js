@@ -4,18 +4,18 @@ const display = document.querySelector(".input");
 const numBtn = [...document.querySelectorAll(".number")];
 const operatorBtn = [...document.querySelectorAll(".operator")];
 // Global variables
-let a;
-let b;
+let arr = [];
+// let b;
 
 container.addEventListener("click", (e) => {
   if (!e.target.matches("button")) return;
   // if user clicks on clear button input field clears and classes reset
   if (e.target.matches(".clear")) {
     display.value = "";
-    numBtn.forEach((num) => {
-      num.classList.remove("number2");
-      num.classList.add("number");
-    });
+    // numBtn.forEach((num) => {
+    //   num.classList.remove("number2");
+    //   num.classList.add("number");
+    // });
     return;
   }
   if (e.target.matches(".number")) {
@@ -28,31 +28,34 @@ container.addEventListener("click", (e) => {
     // expression variable is given the number
     display.value = display.value + number;
     // expression is displayed in input field
-    a = display.value;
   }
-  if (e.target.matches(".number2")) {
-    // if operator was clicked before, display will be reset and attribute will be removed.
-    clearDisplayAfterOp();
-    // Select number
-    let number = e.target.innerText;
-    // expression variable is given the number
-    display.value = display.value + number;
-    // expression is displayed in input field
-    b = display.value;
-  }
+  // if (e.target.matches(".number2")) {
+  //   // if operator was clicked before, display will be reset and attribute will be removed.
+  //   clearDisplayAfterOp();
+  //   // Select number
+  //   let number = e.target.innerText;
+  //   // expression variable is given the number
+  //   display.value = display.value + number;
+  //   // expression is displayed in input field
+  //   b = display.value;
+  // }
 
   if (e.target.matches(".operator")) {
     // An attribute is set to the html to reference if user decides to click on number again
     e.target.setAttribute("data-click", true);
-    numBtn.forEach((num) => {
-      num.classList.toggle("number");
-      num.classList.toggle("number2");
-    });
+    arr.push(display.value);
+    arr.push(e.target.innerText);
+    // numBtn.forEach((num) => {
+    //   num.classList.toggle("number");
+    //   num.classList.toggle("number2");
+    // });
     // Run operate function if two conditions have been satisfied
     // if (a !== "" && b !== "") operate(a, b);
   }
-  console.log(a);
-  console.log(b);
+
+  if (e.target.matches(".equals")) {
+  }
+  console.log(arr);
 });
 
 // Helper function
