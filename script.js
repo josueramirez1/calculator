@@ -5,6 +5,7 @@ const numBtn = [...document.querySelectorAll(".number")];
 const operatorBtn = [...document.querySelectorAll(".operator")];
 // Global variables
 let arr = [];
+
 // let b;
 
 container.addEventListener("click", (e) => {
@@ -42,16 +43,17 @@ container.addEventListener("click", (e) => {
   // }
 
   if (e.target.matches(".operator")) {
+    let equals = document.querySelector(".equals");
+    if (equals.matches("[data-click]")) {
+      equals.removeAttribute("data-click");
+    }
+
     // An attribute is set to the html to reference if user decides to click on number again
     e.target.setAttribute("data-click", true);
     arr.push(parseInt(display.value));
     arr.push(e.target.innerText);
-    // numBtn.forEach((num) => {
-    //   num.classList.toggle("number");
-    //   num.classList.toggle("number2");
-    // });
+
     // Run operate function if two conditions have been satisfied
-    // if (a !== "" && b !== "") operate(a, b);
   }
 
   if (e.target.matches(".equals")) {
