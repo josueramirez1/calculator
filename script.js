@@ -47,33 +47,43 @@ container.addEventListener("click", (e) => {
     if (equals.matches("[data-click]")) {
       equals.removeAttribute("data-click");
     }
-
     // An attribute is set to the html to reference if user decides to click on number again
     e.target.setAttribute("data-click", true);
     arr.push(parseInt(display.value));
     arr.push(e.target.innerText);
 
     // Run operate function if two conditions have been satisfied
+    if (arr.length > 3) {
+      beginToCalculate();
+      arr.splice(0, 3);
+      console.log(arr);
+      arr.unshift(parseInt(display.value));
+      console.log(arr);
+    }
   }
 
   if (e.target.matches(".equals")) {
     e.target.setAttribute("data-click", true);
-    let value1 = arr[0];
-    let operator = arr[1];
-    let value2 = parseInt(display.value);
-    if (arr[1] === "*") operator = multiply;
-    if (arr[1] === "/") operator = divide;
-    if (arr[1] === "+") operator = add;
-    if (arr[1] === "-") operator = subtract;
-
-    let result = operate(value1, value2, operator);
-    display.value = result;
+    beginToCalculate();
     arr = [];
   }
   console.log(arr);
 });
 
 // Helper function
+function beginToCalculate() {
+  let value1 = arr[0];
+  let operator = arr[1];
+  let value2 = parseInt(display.value);
+  if (arr[1] === "*") operator = multiply;
+  if (arr[1] === "/") operator = divide;
+  if (arr[1] === "+") operator = add;
+  if (arr[1] === "-") operator = subtract;
+
+  let result = operate(value1, value2, operator);
+  display.value = result;
+}
+
 function clearDisplayAfterOp() {
   let clicked = document.querySelector("[data-click]");
   if (clicked) {
