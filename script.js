@@ -63,8 +63,7 @@ container.addEventListener("click", (e) => {
 // Helper function
 function beginToCalculate() {
   let [value1, operator] = arr;
-  // let value1 = arr[0];
-  // let operator = arr[1];
+
   let value2 = parseFloat(display.value);
   if (arr[1] === "*") operator = multiply;
   if (arr[1] === "/") operator = divide;
@@ -73,7 +72,7 @@ function beginToCalculate() {
 
   let result = operate(value1, value2, operator);
   // if user tries to divide by zero, display error message and then reset it back to zero
-  if (result !== typeof result) {
+  if (result === "Nice try") {
     display.value = result;
     setTimeout(() => {
       display.value = 0;
