@@ -72,8 +72,12 @@ function beginToCalculate() {
   if (arr[1] === "-") operator = subtract;
 
   let result = operate(value1, value2, operator);
-  if (result === "Nice try") {
+  // if user tries to divide by zero, display error message and then reset it back to zero
+  if (result !== typeof result) {
     display.value = result;
+    setTimeout(() => {
+      display.value = 0;
+    }, 1200);
   } else display.value = Math.round(result * 10) / 10;
 }
 
@@ -100,6 +104,7 @@ function divide(a, b) {
 
 function operate(value1, value2, operation) {
   if (value2 === 0) {
+    arr = [];
     return "Nice try";
   } else return operation(value1, value2);
 }
