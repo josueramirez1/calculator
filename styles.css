@@ -51,6 +51,7 @@ button {
   font-size: inherit;
   font-family: inherit;
   border-radius: 5px;
+  background: none;
 }
 
 button:nth-child(17) {
@@ -61,16 +62,30 @@ button:nth-child(17) {
 
 .number,
 .period {
-  background-color: #b1afff;
+  background-color: hsl(242, 100%, 84%);
+}
+
+.number:hover,
+.period:hover {
+  background-color: hsl(242, 100%, 74%);
 }
 
 .operator,
 .equals {
-  background-color: #ffe9d0;
+  background-color: hsl(32, 100%, 91%);
+}
+.operator:hover,
+.equals:hover {
+  background-color: hsl(32, 100%, 81%);
 }
 
 .clear,
 .plusMinus,
 .percentage {
-  background-color: #fffed3;
+  background-color: hsl(59, 100%, 91%);
+}
+.clear:hover,
+.plusMinus:hover,
+.percentage:hover {
+  background-color: hsl(59, 100%, 81%);
 }
