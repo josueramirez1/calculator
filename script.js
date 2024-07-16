@@ -3,18 +3,22 @@ const container = document.querySelector(".container");
 const display = document.querySelector(".input");
 const operatorBtn = [...document.querySelectorAll(".operator")];
 const period = document.querySelector(".period");
+const characterNumbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 // Global variables
 let arr = [];
 
-container.addEventListener("click", (e) => {
+//Calculator function
+function calculator(e) {
   if (!e.target.matches("button")) return;
   // if user clicks on clear button input field clears and classes reset
   if (e.target.matches(".clear")) {
-    display.value = "";
+    display.value = 0;
     arr = [];
     return;
   }
   if (e.target.matches(".number")) {
+    let key = e.key;
+    console.log(e);
     // if operator was clicked before, display will be reset and attribute will be removed.
     clearDisplayAfterOp();
     operatorBtn.forEach((btn) => (btn.disabled = false));
@@ -58,7 +62,7 @@ container.addEventListener("click", (e) => {
     beginToCalculate();
     arr = [];
   }
-});
+}
 
 // Helper function
 function beginToCalculate() {
@@ -107,3 +111,6 @@ function operate(value1, value2, operation) {
     return "Nice try";
   } else return operation(value1, value2);
 }
+
+// Event Listeners
+container.addEventListener("click", calculator);
